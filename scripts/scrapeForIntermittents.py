@@ -939,6 +939,7 @@ def extract_test_results():
                 if "showFailureSummary" in each_line:
                     temp=each_line.split('><')
                     if len(temp) > 1:
+                        print("Wow2")
 
 
                 print("wow")
@@ -1003,7 +1004,7 @@ def main(argv):
 
         g_temp_filename = os.path.join(g_test_root_dir,'tempText')
         g_summary_text_filename = os.path.join(g_test_root_dir, argv[8])
-        resource_url = '/'.join([g_jenkins_url, "job", g_job_name, g_build_id, "testReport/"])
+        resource_url = '/'.join([g_jenkins_url, "job", g_job_name, g_build_id, "#showFailuresLink/"])
         get_console_out(resource_url)       # save remote console output in local directory
         extract_test_results()      # grab the console text and stored the failed tests.
 
