@@ -930,17 +930,18 @@ def extract_test_results():
 
         for each_line in console_file:  # go through each line of console output to extract build ID, data/time ...
             each_line.strip()
+            print(each_line)
+            if ("Test Result" in each_line) and ("failure" in each_line): # the next few lines will contain failed tests
+                temp = each_line.split("testReport")
+                if ("Test Result" in temp[1]) and ("failure" in temp[1]):        # grab number of failed tests
+                    tempCount = int(temp[1].split("</a>")[1].split(" ")[0].split("(")[1])
 
-            if "All Failed Tests" in each_line:     # the next few lines will contain failed tests
-                found_failed_test = True
-                continue                            # no need to do more until next line
+                    if isinstance(tempCount, int) and tempCount > 0:  # temp[1], temp[2],... should contain failed tests
+                        for findex in range(2,len(temp)):
+                            fname = temp[findex].split(">")[0].split("/")
 
-            if (found_failed_test):                 # first line of failed test
-                if "showFailureSummary" in each_line:
-                    temp=each_line.split('><')
-                    if len(temp) > 1:
-                        print("Wow2")
-
+                            if (len(fname) > 3):
+                                failed_filename=fname[3]    #
 
                 print("wow")
 
