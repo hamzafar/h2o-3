@@ -938,10 +938,10 @@ def extract_test_results():
 
                     if isinstance(tempCount, int) and tempCount > 0:  # temp[1], temp[2],... should contain failed tests
                         for findex in range(2,len(temp)):
-                            fname = temp[findex].split(">")[0].split("/")
+                            tempMess = temp[findex].split(">")
+                            failed_message_path = tempMess[0].strip('"')
+                            fname = tempMess[1].strip("</a").strip("r_suite.")  # put to output summary test fiile
 
-                            if (len(fname) > 3):
-                                failed_filename=fname[3]    #
 
                 print("wow")
 
